@@ -1,0 +1,24 @@
+{
+  "name": "intro-to-the-web",
+  "version": "0.0.1",
+  "description": "A step-by-step guide to actually using the world wide web",
+  "homepage": "https://github.com/cobbland/intro-to-the-web#readme",
+  "bugs": {
+    "url": "https://github.com/cobbland/intro-to-the-web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cobbland/intro-to-the-web.git"
+  },
+  "license": "GPL-3.0",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "browser-sync"
+  },
+  "dependencies": {
+    "rss-parser": "^3.13.0"
+  }
+}

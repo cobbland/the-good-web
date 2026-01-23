@@ -60,3 +60,51 @@ body {
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }
+
+/* Animated rainbow border for special posts */
+#posts-list .special-post {
+    position: relative;
+    background: white;
+    border: none;
+    /* overflow: hidden; */
+}
+
+#posts-list .special-post::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+        75deg,
+        #ff0000,
+        #ff7f00,
+        #ffff00,
+        #00ff00,
+        #0000ff,
+        #9400d3,
+        #ff0000
+    );
+    background-size: 300% 300%;
+    border-radius: 8px;
+    z-index: -1;
+    animation: rainbow-swirl 3s ease infinite;
+}
+
+@keyframes rainbow-swirl {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Keep the green indicator for new posts */
+#posts-list .special-post.new-post::after {
+    border-left: 4px solid #4CAF50;
+}

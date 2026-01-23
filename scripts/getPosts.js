@@ -130,8 +130,14 @@ async function updateHTML(htmlPath = page) {
     postsList.empty();
     postsUpdated.empty();
     posts.forEach(post => {
+        // Extract domain from the post's source link
+        const domain = extractDomain(post.sourceLink);
+        const specialDomains = ['cobb.land', 'densford.net'];
+        const isSpecial = specialDomains.includes(domain);
+        const specialClass = isSpecial ? 'special-post' : '';
+        
         postsList.append(`
-            <li class="${post.class}">
+            <li class="${post.class} ${specialClass}">
                 <div>
                     <a href="${post.link}" class="post-link">${post.title}</a>
                 </div>

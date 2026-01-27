@@ -2,7 +2,7 @@ name: Daily Netlify Build
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "42 11 * * *"
   workflow_dispatch: 
 
 jobs:

@@ -2,32 +2,20 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.subheading {
+    font-style: italic;
+}
+
 .coming {
     font-style: italic;
 }
 
-#posts-list {
+#feeds {
     list-style: none;
     padding: 0;
     display: grid;
     gap: 1rem;
-    grid-template-columns: 1fr;
-}
-
-#posts-list li {
-    background: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1rem;
-    transition: box-shadow 0.2s ease;
-}
-
-#posts-list li:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-#posts-list li.new-post {
-    border-left: 4px solid #4CAF50;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .favicon {
@@ -37,74 +25,3 @@ body {
     vertical-align: middle;
 }
 
-#posts-list a {
-    font-weight: 500;
-    text-decoration: none;
-}
-
-#posts-list a:hover {
-    text-decoration: underline;
-}
-
-#posts-list li > div:first-child {
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    font-size: 1.125rem;
-    color: #0066cc; 
-    text-decoration: none;
-    line-height: 1.4;
-}
-
-.post-meta a {
-    color: #666;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-}
-
-/* Animated rainbow border for special posts */
-#posts-list .special-post {
-    position: relative;
-    background: white;
-    border: none;
-    /* overflow: hidden; */
-}
-
-#posts-list .special-post::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(
-        75deg,
-        #ff0000,
-        #ff7f00,
-        #ffff00,
-        #00ff00,
-        #0000ff,
-        #9400d3,
-        #ff0000
-    );
-    background-size: 300% 300%;
-    border-radius: 8px;
-    z-index: -1;
-    animation: rainbow-swirl 3s ease infinite;
-}
-
-@keyframes rainbow-swirl {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* Keep the green indicator for new posts */
-#posts-list .special-post.new-post::after {
-    border-left: 4px solid #4CAF50;
-}

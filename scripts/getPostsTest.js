@@ -32,52 +32,20 @@ const feeds = [
     'https://ttrpgfans.com',
 ];
 
-function extractDomain(url) {
-    try {
-        return new URL(url).hostname.replace("www.", "");
-    } catch {
-        return "";
-    }
-}
-
-function isWithinDaysFromToday(date, days) {
-    const today = new Date();
-    const dateInput = new Date(date);
-
-    // Normalize both dates to midnight to avoid time-of-day issues
-    today.setHours(0, 0, 0, 0);
-    dateInput.setHours(0, 0, 0, 0);
-
-    const diffInMs = dateInput - today;
-    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-
-    return diffInDays <= 0 && diffInDays >= -Math.abs(days);
-}
-
-function isWithinHours(date, hours) {
-    const now = new Date();
-    const dateInput = new Date(date);
-    const diffInMs = now - dateInput;
-    const diffInHours = diffInMs / (1000 * 60 * 60);
-    
-    return diffInHours >= 0 && diffInHours <= hours;
-}
 
 async function fetchFeeds(feedsArray = feeds, entryCount = 12) {
-    // Fetch all feeds with error handling for each
     const feedPromises = feedsArray.map(async (url) => {
         try {
             return await parser.parseURL(url);
         } catch (error) {
             console.error(`Failed to parse feed: ${url}`);
             console.error(`Error: ${error.message}`);
-            return null; // Return null for failed feeds
+            return null;
         }
     });
 
     const allFeeds = await Promise.all(feedPromises);
-    
-    // Filter out null values (failed feeds)
+
     const validFeeds = allFeeds.filter(feed => feed !== null);
     
     console.log(`Successfully parsed ${validFeeds.length} out of ${feedsArray.length} feeds`);
@@ -85,7 +53,7 @@ async function fetchFeeds(feedsArray = feeds, entryCount = 12) {
     const allPosts = [];
     
     for (let site of validFeeds) {
-        const domain = extractDomain(site.link || site.items[0]?.link);
+        const domain = site.link;
         const favicon = `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
         const siteName = site.title || domain;
         

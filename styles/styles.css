@@ -1,110 +1,149 @@
+/* @import url(https://fonts.bunny.net/css?family=unifrakturmaguntia:400); */
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: Arial, Helvetica, sans-serif
 }
 
-.coming {
-    font-style: italic;
+h1 {
+    /* font-family: 'UnifrakturMaguntia', 'Times New Roman', Times, serif; */
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 3.5em;
+    text-align: center;
+    margin: 0 0 0.2em 0;
 }
 
-#posts-list {
+h2 {
+    margin: 0;
+}
+
+h2 a {
+    color: black;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+h2 a:hover::after {
+    content: " ↩";
+    font-size: 0.8em;
+}
+
+#tgw-heading p {
+    text-align: center;
+    font-size: 0.8em;
+}
+
+#tgw-content {
+    margin-top: 3rem;
+    max-width: 70ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* #tgw-content h2 {
+    text-align: center;
+} */
+
+#nav {
+    border-top: 4px solid black;
+    border-bottom: 2px solid black;
+    padding: 0.4em 0;
+}
+
+#nav ul {
     list-style: none;
     padding: 0;
-    display: grid;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 1rem;
-    grid-template-columns: 1fr;
 }
 
-#posts-list li {
-    background: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1rem;
-    transition: box-shadow 0.2s ease;
-}
-
-#posts-list li:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-#posts-list li.new-post {
-    border-left: 4px solid #4CAF50;
-}
-
-.favicon {
-    height: 20px;
-    width: 20px;
-    margin-right: 0.5rem;
-    vertical-align: middle;
-}
-
-#posts-list a {
-    font-weight: 500;
+#nav a {
     text-decoration: none;
+    color: black;
+    font-weight: bold;
 }
 
-#posts-list a:hover {
+#nav a:hover {
     text-decoration: underline;
 }
 
-#posts-list li > div:first-child {
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    font-size: 1.125rem;
-    color: #0066cc; 
+#nav ul {
+    color: #00000077;
+}
+
+#content {
+    margin-top: 1rem;
+}
+
+#content .topic .feeds {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-bottom: 2rem;
+}
+
+#editions {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    text-transform: uppercase;
+    text-align: center;
+    color: #00000077;
+}
+
+#editions a {
     text-decoration: none;
-    line-height: 1.4;
+    color: #00000077;
 }
 
-.post-meta a {
-    color: #666;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
+#editions a.selected {
+    color: black;
 }
 
-/* Animated rainbow border for special posts */
-#posts-list .special-post {
-    position: relative;
-    background: white;
-    border: none;
-    /* overflow: hidden; */
+.issue-info a {
+    color: black;
 }
 
-#posts-list .special-post::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(
-        75deg,
-        #ff0000,
-        #ff7f00,
-        #ffff00,
-        #00ff00,
-        #0000ff,
-        #9400d3,
-        #ff0000
-    );
-    background-size: 300% 300%;
-    border-radius: 8px;
-    z-index: -1;
-    animation: rainbow-swirl 3s ease infinite;
+.feed-name a {
+    text-decoration: none;
+    color: black;
 }
 
-@keyframes rainbow-swirl {
-    0% {
-        background-position: 0% 50%;
+.feed-name a:hover {
+    text-decoration: underline;
+}
+
+.posts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.post {
+    margin: 0.6em 0;
+}
+
+.today {
+    font-weight: bold;
+}
+
+@media (min-width: 800px) {
+    #tgw-heading {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 0.4rem;
     }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
 
-/* Keep the green indicator for new posts */
-#posts-list .special-post.new-post::after {
-    border-left: 4px solid #4CAF50;
+    .issue-info {
+        margin: 0;
+    }
+
+    .issue-info.info {
+        text-align: right;
+    }
 }

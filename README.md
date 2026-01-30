@@ -1,3 +1,4 @@
-# Intro to the Web
+# The Good Web
 
-A step-by-step guide to actually using the world wide web.
+An introduction and step-by-step guide to actually using the world wide web.
+

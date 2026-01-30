@@ -1,3 +1,5 @@
+/* @import url(https://fonts.bunny.net/css?family=unifrakturmaguntia:400); */
+
 * {
   box-sizing: border-box;
 }
@@ -7,6 +9,7 @@ body {
 }
 
 h1 {
+    /* font-family: 'UnifrakturMaguntia', 'Times New Roman', Times, serif; */
     font-family: 'Times New Roman', Times, serif;
     font-size: 3.5em;
     text-align: center;
@@ -16,6 +19,33 @@ h1 {
 h2 {
     margin: 0;
 }
+
+h2 a {
+    color: black;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+h2 a:hover::after {
+    content: " ↩";
+    font-size: 0.8em;
+}
+
+#tgw-heading p {
+    text-align: center;
+    font-size: 0.8em;
+}
+
+#tgw-content {
+    margin-top: 3rem;
+    max-width: 70ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* #tgw-content h2 {
+    text-align: center;
+} */
 
 #nav {
     border-top: 4px solid black;
@@ -43,20 +73,24 @@ h2 {
     text-decoration: underline;
 }
 
-#feeds {
+#nav ul {
+    color: #00000077;
+}
+
+#content {
     margin-top: 1rem;
+}
+
+#content .topic .feeds {
     display: grid;
-    gap: 1px;
+    gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    /* margin-left: auto;
-    margin-right: auto;
-    max-width: fit-content; */
-    justify-items: center;
+    margin-bottom: 2rem;
 }
 
 #editions {
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
+    font-weight: lighter;
     text-transform: uppercase;
     text-align: center;
     color: #00000077;
@@ -71,13 +105,8 @@ h2 {
     color: black;
 }
 
-.issue-info {
-    font-size: 0.8em;
-    text-align: center;
-}
-
-.feed {
-    padding: 0.4rem;
+.issue-info a {
+    color: black;
 }
 
 .feed-name a {
@@ -93,6 +122,14 @@ h2 {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.post {
+    margin: 0.6em 0;
+}
+
+.today {
+    font-weight: bold;
 }
 
 @media (min-width: 800px) {

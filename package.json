@@ -16,11 +16,11 @@
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "browser-sync"
+    "dev": "browser-sync",
+    "fetch": "node scripts/getFeeds.js"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
-    "rss-parser": "^3.13.0",
-    "xml2js": "^0.6.2"
+    "rss-parser": "^3.13.0"
   }
 }

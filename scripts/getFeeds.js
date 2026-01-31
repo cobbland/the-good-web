@@ -10,22 +10,31 @@ const feeds = {
         'https://julia.densford.net/feed.xml',
     ],
     news: [
-        'https://feeds.npr.org/1001/rss.xml',
         'https://www.aljazeera.com/xml/rss/all.xml',
     ],
     me: [
-        'https://cobb.land/feed.xml',
+        'https://cobb.land/',
     ],
 };
 
 async function getFeeds(feedsInput, age, count) {
+    console.log(`Fetching ${count} posts from each feed from the last ${age} days...`)
     let allFeeds = {};
+    let numOfValidFeeds = 0;
     const toDate = new Date();
     toDate.setUTCDate(toDate.getUTCDate() - age);
     for (const key of Object.keys(feedsInput)) {
         allFeeds[key] = [];
         for (const url of feedsInput[key]) {
-            const feed = await parser.parseURL(url);
+            let feed = false;
+            try {
+                feed = await parser.parseURL(url);
+                numOfValidFeeds++;
+            } catch(err) {
+                console.log(`Failed to fetch: ${url}`);
+                console.log(err.message)
+                continue;
+            }
             const posts = feed.items
                 .filter((post) => {
                     const postDate = new Date(post.pubDate);
@@ -58,6 +67,7 @@ async function getFeeds(feedsInput, age, count) {
             delete allFeeds[topic];
         }
     }
+    console.log(`Fetched ${numOfValidFeeds} feeds.`)
     return allFeeds;
 }
 

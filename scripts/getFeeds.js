@@ -1,32 +1,8 @@
 const Parser = require('rss-parser');
-let parser = new Parser();
-// const feeds = [
-//     'https://densford.net/rss.xml',
-//     'https://cobb.land/feed.xml',
-//     'https://thinkygames.com/feed/atom/',
-//     'https://patchworkpaladin.com/feed/',
-//     'https://www.sabregamesandcards.com/blog-feed.xml',
-//     'https://seedofworlds.blogspot.com/feeds/posts/default',
-//     'https://ttrpg.in/feed/',
-//     'https://idlecartulary.substack.com/feed',
-//     'https://questingbeast.substack.com/feed',
-//     'https://gardinerbryant.com/rss/',
-//     'https://slyflourish.com/index.xml#feed',
-//     'https://www.privacyguides.org/rss/',
-//     'https://kill-the-newsletter.com/feeds/9px5rl1ftct41katelbe.xml',
-//     'https://going-medieval.com/feed/',
-//     'https://www.brandonsanderson.com/blogs/blog.atom',
-//     'https://bigfriendly.guide/feed/',
-//     'https://kill-the-newsletter.com/feeds/8c8utgynkgsjn90pv6cc.xml',
-//     'https://legiblenews.com/daily/feeds/5776776a3a948f1035cbafcd09ca4421.rss',
-//     'https://orbitalindex.com/feed.xml',
-//     'https://xkcd.com/atom.xml',
-//     'https://www.gamingonlinux.com/article_rss.php',
-//     'https://reactormag.com/feed/',
-//     'https://dndblogs.com/index.xml#feed',
-//     'https://kill-the-newsletter.com/feeds/t5vo77yj1jwru2xvk1dx.xml',
-//     'https://ttrpgfans.com/feed/',
-// ];
+const parser = new Parser();
+const cheerio = require('cheerio');
+const fs = require('fs/promises');
+const page = 'weekly/index.html';
 const feeds = {
     blogs: [
         'https://cobb.land/feed.xml',
@@ -59,8 +35,8 @@ async function getFeeds(feedsInput = feeds, age = 7, count = 6) {
                     }
                 });
             allFeeds[key].push({
-                title: feed.title || feed.link,
-                link: feed.link || feed.feedUrl,
+                siteTitle: feed.title || feed.link,
+                siteLink: feed.link || feed.feedUrl,
                 posts: posts,
             });
         }
@@ -68,6 +44,29 @@ async function getFeeds(feedsInput = feeds, age = 7, count = 6) {
     return allFeeds;
 }
 
-getFeeds().then((result) => {
-    console.log(result);
-});
+async function updateHTML(htmlPath = page) {
+    const posts = await getFeeds();
+    const html = await fs.readFile(htmlPath, 'utf-8');
+    const $ = cheerio.load(html);
+    const nav = $('#nav > ul');
+    const content = $('#content');
+    nav.empty();
+    content.empty();
+    Object.keys(posts).forEach(key => {
+        nav.append(`
+            <li><a href="#${key}">${key}</a></li>
+        `);
+        content.append(`
+            <div id="${key}" class="topic">
+                <h2><a href="#the-good-web">${key}</a></h2>
+                <div class="feeds">
+
+                </div>
+            </div>
+        `)
+        const feeds = $(`#${key} > .feeds`);
+        // iterate through posts an append to feeds above
+    })
+}
+
+updateHTML();

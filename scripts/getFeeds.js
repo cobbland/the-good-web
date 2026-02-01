@@ -4,20 +4,23 @@ const cheerio = require('cheerio');
 const fs = require('fs/promises');
 const weekly = 'weekly/index.html';
 const daily = 'daily/index.html';
-const opmlFeeds = 'data/feeds.opml'
-let title = 'The Good Web';
-let feeds = {
-    blogs: [
-        'https://blog.saisarida.com/feed.xml',
-        'https://julia.densford.net/feed.xml',
-    ],
-    news: [
-        'https://www.aljazeera.com/xml/rss/all.xml',
-    ],
-    me: [
-        'https://cobb.land/',
-    ],
-};
+const opmlFeeds = 'data/feeds.opml';
+
+async function translateOPML(opmlPath) {
+    const opml = await fs.readFile(opmlPath, 'utf-8');
+    const $ = cheerio.load(opml, {xml: true});
+    const title = $('head > title').text();
+    const feeds = {};
+    $('body > outline').each((i, elem) => {
+        feeds[$(elem).attr('text')] = [];
+        $(elem).find('outline').each((n, subElem) => {
+            feeds[$(elem).attr('text')].push(
+                $(subElem).attr('xmlUrl')
+            );
+        })
+    });
+    return [title, feeds];
+}
 
 async function getFeeds(feedsInput, age, count) {
     console.log(`Fetching ${count} posts from each feed from the last ${age} days...`)
@@ -31,6 +34,7 @@ async function getFeeds(feedsInput, age, count) {
             let feed = false;
             try {
                 feed = await parser.parseURL(url);
+                console.log(`Fetching: ${url}`);
                 numOfValidFeeds++;
             } catch(err) {
                 console.log(`Failed to fetch: ${url}`);
@@ -51,7 +55,8 @@ async function getFeeds(feedsInput, age, count) {
                 .map((post) => {
                     return {
                         postTitle: post.title || 'Untitled Post',
-                        postLink: post.link
+                        postLink: post.link,
+                        // postClass: 'today' if today
                     }
                 });
             const site = {
@@ -73,33 +78,26 @@ async function getFeeds(feedsInput, age, count) {
     return allFeeds;
 }
 
-async function translateOPML(opmlPath = opmlFeeds) {
-    const opml = await fs.readFile(opmlPath, 'utf-8');
-    const $ = cheerio.load(opml);
-    const newObject = {};
-    $(body > outline).each((i, elem) => {
-        // add keys of outline text property to newObject
-        // make each key point to an empty array
-        $(outline, body > outline).each((i, elem) => {
-            // fill each above array with objects containing title or text and xmlUrl of child outline elements
-        })
-    })
-    feeds = newObject;
-}
-
-translateOPML();
-
-async function updateHTML(htmlPath, feedsInput, age, count) {
+async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
     const posts = await getFeeds(feedsInput, age, count);
     const html = await fs.readFile(htmlPath, 'utf-8');
     const $ = cheerio.load(html);
+    const todayDate = new Date().toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
     const pageTitle = $('h1', '#tgw-heading');
+    const updateDate = $('p.issue-info.date');
     const nav = $('#nav > ul');
     const content = $('#content');
-    pageTitle.empty()
+    pageTitle.empty();
+    updateDate.empty();
     nav.empty();
     content.empty();
-    pageTitle.append(`${title}`)
+    pageTitle.append(`${feedsTitle}`);
+    updateDate.append(`${todayDate}`);
     Object.keys(posts).forEach((topic) => {
         nav.append(`
             <li><a href="#${topic}">${topic}</a></li>
@@ -139,5 +137,27 @@ async function updateHTML(htmlPath, feedsInput, age, count) {
     await fs.writeFile(htmlPath, $.html(), 'utf-8');
 }
 
-// updateHTML(weekly, feeds, 8, 5);
-// updateHTML(daily, feeds, 2, 5);
+async function buildTheGoodWeb({ runDaily = false, runWeekly = true } = {}) {
+    const [feedsTitle, feedsInput] = await translateOPML(opmlFeeds);
+    if (runDaily) {
+        try {
+            console.log('Updating daily...');
+            await updateHTML(daily, feedsTitle, feedsInput, 2, 5);
+        } catch(err) {
+            console.log('Daily tried and failed.');
+            console.log(err.message);
+        }
+    }
+    if (runWeekly) {
+        try {
+            console.log('Updating weekly...');
+            await updateHTML(weekly, feedsTitle, feedsInput, 8, 5);
+        } catch(err) {
+            console.log('Weekly tried and failed.');
+            console.log(err.message);
+        } 
+    }
+    process.exit(0);
+}
+
+buildTheGoodWeb({runDaily: true});

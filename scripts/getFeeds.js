@@ -4,6 +4,9 @@ const cheerio = require('cheerio');
 const fs = require('fs/promises');
 const weekly = 'weekly/index.html';
 const daily = 'daily/index.html';
+const opmlFeeds = 'data/feeds.opml'
+// let feeds;
+let title = 'The Good Web';
 const feeds = {
     blogs: [
         'https://blog.saisarida.com/feed.xml',
@@ -71,14 +74,28 @@ async function getFeeds(feedsInput, age, count) {
     return allFeeds;
 }
 
+// async function translateOPML(opmlPath = opmlFeeds) {
+//     const opml = await fs.readFile(opmlPath, 'utf-8');
+//     const $ = cheerio.load(opml);
+//     const newObject = {};
+//     $(body > outline).each((i, elem) => {
+//         newObject[]
+//     })
+// }
+
+// translateOPML();
+
 async function updateHTML(htmlPath, feedsInput, age, count) {
     const posts = await getFeeds(feedsInput, age, count);
     const html = await fs.readFile(htmlPath, 'utf-8');
     const $ = cheerio.load(html);
+    const pageTitle = $('h1', '#tgw-heading');
     const nav = $('#nav > ul');
     const content = $('#content');
+    pageTitle.empty()
     nav.empty();
     content.empty();
+    pageTitle.append(`${title}`)
     Object.keys(posts).forEach((topic) => {
         nav.append(`
             <li><a href="#${topic}">${topic}</a></li>

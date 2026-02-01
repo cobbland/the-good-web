@@ -5,9 +5,8 @@ const fs = require('fs/promises');
 const weekly = 'weekly/index.html';
 const daily = 'daily/index.html';
 const opmlFeeds = 'data/feeds.opml'
-// let feeds;
 let title = 'The Good Web';
-const feeds = {
+let feeds = {
     blogs: [
         'https://blog.saisarida.com/feed.xml',
         'https://julia.densford.net/feed.xml',
@@ -74,16 +73,21 @@ async function getFeeds(feedsInput, age, count) {
     return allFeeds;
 }
 
-// async function translateOPML(opmlPath = opmlFeeds) {
-//     const opml = await fs.readFile(opmlPath, 'utf-8');
-//     const $ = cheerio.load(opml);
-//     const newObject = {};
-//     $(body > outline).each((i, elem) => {
-//         newObject[]
-//     })
-// }
+async function translateOPML(opmlPath = opmlFeeds) {
+    const opml = await fs.readFile(opmlPath, 'utf-8');
+    const $ = cheerio.load(opml);
+    const newObject = {};
+    $(body > outline).each((i, elem) => {
+        // add keys of outline text property to newObject
+        // make each key point to an empty array
+        $(outline, body > outline).each((i, elem) => {
+            // fill each above array with objects containing title or text and xmlUrl of child outline elements
+        })
+    })
+    feeds = newObject;
+}
 
-// translateOPML();
+translateOPML();
 
 async function updateHTML(htmlPath, feedsInput, age, count) {
     const posts = await getFeeds(feedsInput, age, count);
@@ -135,5 +139,5 @@ async function updateHTML(htmlPath, feedsInput, age, count) {
     await fs.writeFile(htmlPath, $.html(), 'utf-8');
 }
 
-updateHTML(weekly, feeds, 8, 5);
-updateHTML(daily, feeds, 2, 5);
+// updateHTML(weekly, feeds, 8, 5);
+// updateHTML(daily, feeds, 2, 5);

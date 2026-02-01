@@ -12,3 +12,4 @@ An introduction and step-by-step guide to actually using the world wide web.
 - [ ] Finish main page
 - [ ] Make opinionated and feeds pages
 - [ ] Make good default opml
+- [ ] Fix updating title to also update title in head

@@ -10,7 +10,7 @@ An introduction and step-by-step guide to actually using the world wide web.
 - [ ] Add timeout to fetching feeds ([Promise.race()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)?)
 - [ ] Rename project (The Good Web)
 - [ ] Finish main page
-- [ ] Make opinionated and feeds pages
+- [ ] Make "opinionated" page
 - [ ] Make good default opml
 - [ ] Fix updating title to also update title in head
 - [ ] Make unvisited links bold

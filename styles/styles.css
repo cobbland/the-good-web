@@ -140,8 +140,12 @@ h2 a:hover::after {
     text-decoration: none;
 }
 
+.post a:visited {
+    color: #888888;
+}
+
 .post:hover {
-    background-color: #00000022;
+    background-color: #00000011;
 }
 
 .post .post-title {

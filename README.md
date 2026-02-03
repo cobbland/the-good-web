@@ -14,3 +14,4 @@ An introduction and step-by-step guide to actually using the world wide web.
 - [ ] Make good default opml
 - [ ] Fix updating title to also update title in head
 - [ ] Add "more" link if posts list is truncated
+- [ ] Fix favicons

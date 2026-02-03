@@ -148,6 +148,21 @@ h2 a:hover::after {
     text-decoration: underline;
 }
 
+.post.more-posts a {
+    color: #00000077;
+    font-size: 0.8em;
+    display: block;
+    width: min-content;
+}
+
+.post.more-posts a .post-title{
+    text-decoration: none;
+}
+
+.post.more-posts:hover {
+    background-color: unset;
+}
+
 .recency {
     color: #00000077;
     font-size: 0.8em;

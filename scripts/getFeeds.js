@@ -34,51 +34,62 @@ async function getFeeds(feedsInput, age, count) {
             let feed = false;
             try {
                 feed = await parser.parseURL(url);
-                console.log(`Fetching: ${url}`);
-                numOfValidFeeds++;
+
             } catch(err) {
                 console.log(`Failed to fetch: ${url}`);
                 console.log(err.message)
                 continue;
             }
-            const posts = feed.items
-                .filter((post) => {
-                    const postDate = new Date(post.pubDate);
-                    return postDate.getTime() >= toDate.getTime();
-                })
-                .sort((a, b) => {
-                    const firstDate = new Date(a.pubDate);
-                    const secondDate = new Date(b.pubDate);
-                    return secondDate.getTime() - firstDate.getTime();
-                })
-                .slice(0, count)
-                .map((post) => {
-                    let recency;
-                    const today = new Date();
-                    const posted = new Date(post.pubDate);
-                    const difference = today.getTime() - posted.getTime();
-                    if (difference <= 86400000) {
-                        recency = `${Math.floor(difference / 3600000)}h`;
-                        if (recency === '0h') {
-                            recency = 'now';
+            if (feed) {
+                const posts = feed.items
+                    .filter((post) => {
+                        const postDate = new Date(post.pubDate);
+                        return postDate.getTime() >= toDate.getTime();
+                    })
+                    .sort((a, b) => {
+                        const firstDate = new Date(a.pubDate);
+                        const secondDate = new Date(b.pubDate);
+                        return secondDate.getTime() - firstDate.getTime();
+                    })
+                    .slice(0, count+1)
+                    .map((post) => {
+                        let recency;
+                        const today = new Date();
+                        const posted = new Date(post.pubDate);
+                        const difference = today.getTime() - posted.getTime();
+                        if (difference <= 86400000) {
+                            recency = `${Math.floor(difference / 3600000)}h`;
+                            if (recency === '0h') {
+                                recency = 'now';
+                            }
+                        } else {
+                            recency = `${Math.floor(difference / 86400000)}d`;
                         }
-                    } else {
-                        recency = `${Math.floor(difference / 86400000)}d`;
-                    }
-                    return {
-                        postTitle: post.title || 'Untitled Post',
-                        postLink: post.link,
-                        postRecency: recency,
-                    }
-                });
-            const site = {
-                siteTitle: feed.title || feed.link,
-                siteLink: feed.link || feed.feedUrl,
-                posts: posts,
-            };
-            if (site.posts.length > 0) {
-                allFeeds[key].push(site);
+                        return {
+                            postTitle: post.title || 'Untitled Post',
+                            postLink: post.link,
+                            postRecency: recency,
+                        }
+                    });
+                const site = {
+                    siteTitle: feed.title || feed.link,
+                    siteLink: feed.link || feed.feedUrl,
+                    posts: posts,
+                };
+                if (site.posts.length > count) {
+                    site.posts.push({
+                        postTitle: 'more',
+                        postLink: site.siteLink,
+                        postRecency: 'more',
+                    });
+                }
+                if (site.posts.length > 0) {
+                    allFeeds[key].push(site);
+                }
+                console.log(`Fetched: ${url}`);
+                numOfValidFeeds++;
             }
+            
         }
     }
     for (const topic of Object.keys(allFeeds)) {
@@ -126,14 +137,24 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
         posts[topic].forEach((feed) => {
             let feedPosts = ``;
             feed.posts.forEach((post) => {
-                feedPosts = feedPosts + `
-                    <li class="post">
-                        <a href="${post.postLink}">
-                            <div class="post-title">${post.postTitle}</div>
-                            <div class="recency">${post.postRecency}</div>
-                        </a>
-                    </li>
-                `
+                if (post.postRecency === 'more') {
+                    feedPosts = feedPosts + `
+                        <li class="post more-posts">
+                            <a href="${post.postLink}">
+                                <div class="post-title">${post.postTitle}</div>
+                            </a>
+                        </li>
+                    `
+                } else {
+                    feedPosts = feedPosts + `
+                        <li class="post">
+                            <a href="${post.postLink}">
+                                <div class="post-title">${post.postTitle}</div>
+                                <div class="recency">${post.postRecency}</div>
+                            </a>
+                        </li>
+                    `
+                }
             });
             feeds.append(`
                 <div class="feed">

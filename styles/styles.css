@@ -137,23 +137,21 @@ h2 a:hover::after {
     justify-content: space-between;
     align-items: center;
     color: black;
+    text-decoration: none;
 }
 
 .post:hover {
     background-color: #00000022;
 }
 
-/* .post a {
-    font-weight: bold;
-} */
-
-/* .post a:visited {
-    font-weight: normal;
-} */
+.post .post-title {
+    text-decoration: underline;
+}
 
 .recency {
     color: #00000077;
     font-size: 0.8em;
+    text-decoration: none;
 }
 
 .recency::before {

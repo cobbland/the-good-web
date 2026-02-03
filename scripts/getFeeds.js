@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 const fs = require('fs/promises');
 const weekly = 'weekly/index.html';
 const daily = 'daily/index.html';
-const opmlFeeds = 'data/feeds.opml';
+const opmlFeeds = 'data/feeds-in-progress.opml';
 
 async function translateOPML(opmlPath) {
     const opml = await fs.readFile(opmlPath, 'utf-8');
@@ -129,9 +129,9 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
                 feedPosts = feedPosts + `
                     <li class="post">
                         <a href="${post.postLink}">
-                            ${post.postTitle}
+                            <div class="post-title">${post.postTitle}</div>
+                            <div class="recency">${post.postRecency}</div>
                         </a>
-                        <div class="recency">${post.postRecency}</div>
                     </li>
                 `
             });

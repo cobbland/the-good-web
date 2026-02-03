@@ -125,12 +125,13 @@ h2 a:hover::after {
     margin: 0;
 }
 
-.post {
-    margin: 0.4em 0;
+.post a {
+    padding: 0.2em 0;
     display: flex;
     gap: 0.2em;
     justify-content: space-between;
     align-items: center;
+    color: black;
 }
 
 .post:hover {

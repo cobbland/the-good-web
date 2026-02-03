@@ -53,10 +53,22 @@ async function getFeeds(feedsInput, age, count) {
                 })
                 .slice(0, count)
                 .map((post) => {
+                    let recency;
+                    const today = new Date();
+                    const posted = new Date(post.pubDate);
+                    const difference = today.getTime() - posted.getTime();
+                    if (difference <= 86400000) {
+                        recency = `${Math.floor(difference / 3600000)}h`;
+                        if (recency === '0h') {
+                            recency = 'now';
+                        }
+                    } else {
+                        recency = `${Math.floor(difference / 86400000)}d`;
+                    }
                     return {
                         postTitle: post.title || 'Untitled Post',
                         postLink: post.link,
-                        // postClass: 'today' if today
+                        postRecency: recency,
                     }
                 });
             const site = {
@@ -119,6 +131,7 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
                         <a href="${post.postLink}">
                             ${post.postTitle}
                         </a>
+                        <div class="recency">${post.postRecency}</div>
                     </li>
                 `
             });

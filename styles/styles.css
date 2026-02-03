@@ -43,10 +43,6 @@ h2 a:hover::after {
     margin-right: auto;
 }
 
-/* #tgw-content h2 {
-    text-align: center;
-} */
-
 #nav {
     border-top: 4px solid black;
     border-bottom: 2px solid black;
@@ -104,6 +100,15 @@ h2 a:hover::after {
 
 #editions a.selected {
     color: black;
+}
+
+.topic {
+    width: 100%;
+}
+
+.topic:nth-of-type(1n + 2) {
+    padding-top: 1rem;
+    border-top: 1px solid black;
 }
 
 .issue-info a {

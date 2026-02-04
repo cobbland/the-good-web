@@ -161,7 +161,7 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
     await fs.writeFile(htmlPath, $.html(), 'utf-8');
 }
 
-async function buildTheGoodWeb({ runDaily = false, runWeekly = true } = {}) {
+async function buildTheGoodWeb({ runDaily = true, runWeekly = false } = {}) {
     const [feedsTitle, feedsInput] = await translateOPML(opmlFeeds);
     if (runDaily) {
         try {
@@ -184,4 +184,4 @@ async function buildTheGoodWeb({ runDaily = false, runWeekly = true } = {}) {
     process.exit(0);
 }
 
-buildTheGoodWeb({runDaily: true});
+module.exports = { buildTheGoodWeb };

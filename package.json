@@ -17,7 +17,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "browser-sync",
-    "fetch": "node scripts/getFeeds.js"
+    "fetch": "node scripts/goToPrint.js"
   },
   "dependencies": {
     "cheerio": "^1.1.2",

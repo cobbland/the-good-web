@@ -53,18 +53,8 @@ async function getFeeds(feedsInput, age, count) {
                     })
                     .slice(0, count+1)
                     .map((post) => {
-                        let recency;
-                        const today = new Date();
                         const posted = new Date(post.pubDate);
-                        const difference = today.getTime() - posted.getTime();
-                        if (difference <= 86400000) {
-                            recency = `${Math.floor(difference / 3600000)}h`;
-                            if (recency === '0h') {
-                                recency = 'now';
-                            }
-                        } else {
-                            recency = `${Math.floor(difference / 86400000)}d`;
-                        }
+                        const recency = `${posted.getDate()}/${posted.getMonth()+1}`
                         return {
                             postTitle: post.title || 'Untitled Post',
                             postLink: post.link,
@@ -105,7 +95,7 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
     const posts = await getFeeds(feedsInput, age, count);
     const html = await fs.readFile(htmlPath, 'utf-8');
     const $ = cheerio.load(html);
-    const todayDate = new Date().toLocaleDateString('en-US', {
+    const todayDate = new Date().toLocaleDateString('en-GB', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',

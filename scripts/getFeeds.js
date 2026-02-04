@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 const fs = require('fs/promises');
 const weekly = 'weekly/index.html';
 const daily = 'daily/index.html';
-const opmlFeeds = 'data/feeds-in-progress.opml';
+const opmlFeeds = 'data/feeds.opml';
 
 async function translateOPML(opmlPath) {
     const opml = await fs.readFile(opmlPath, 'utf-8');
@@ -26,6 +26,7 @@ async function getFeeds(feedsInput, age, count) {
     console.log(`Fetching ${count} posts from each feed from the last ${age} days...`)
     let allFeeds = {};
     let numOfValidFeeds = 0;
+    let failedFeeds = [];
     const toDate = new Date();
     toDate.setUTCDate(toDate.getUTCDate() - age);
     const timeout = (ms) => {
@@ -43,6 +44,7 @@ async function getFeeds(feedsInput, age, count) {
                     timeout(10000)
                 ]);
             } catch(err) {
+                failedFeeds.push(url);
                 console.log(`Failed to fetch: ${url}`);
                 console.log(err.message)
                 continue;
@@ -51,7 +53,7 @@ async function getFeeds(feedsInput, age, count) {
                 const posts = feed.items
                     .filter((post) => {
                         const postDate = new Date(post.pubDate);
-                        return postDate.getTime() >= toDate.getTime();
+                        return postDate.getTime() >= (toDate.getTime() - 3600000);
                     })
                     .sort((a, b) => {
                         const firstDate = new Date(a.pubDate);
@@ -95,11 +97,15 @@ async function getFeeds(feedsInput, age, count) {
         }
     }
     console.log(`Fetched ${numOfValidFeeds} feeds.`)
-    return allFeeds;
+    console.log(`Failed to fetch ${failedFeeds.length} feeds.`)
+    for (const topic of Object.keys(allFeeds)) {
+        allFeeds[topic].sort((a, b) => a.siteTitle.localeCompare(b.siteTitle));
+    }
+    return { allFeeds, failedFeeds };
 }
 
 async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
-    const posts = await getFeeds(feedsInput, age, count);
+    const { allFeeds, failedFeeds } = await getFeeds(feedsInput, age, count);
     const html = await fs.readFile(htmlPath, 'utf-8');
     const $ = cheerio.load(html);
     const todayDate = new Date().toLocaleDateString('en-GB', {
@@ -113,11 +119,13 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
     const updateDate = $('p.issue-info.date');
     const nav = $('#nav > ul');
     const content = $('#content');
+    const failed = $('#failed');
     headTitle.empty();
     pageTitle.empty();
     updateDate.empty();
     nav.empty();
     content.empty();
+    failed.empty();
     if (age <= 3) {
         headTitle.append(`${feedsTitle} | Daily`);
     } else {
@@ -125,7 +133,7 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
     }
     pageTitle.append(`${feedsTitle}`);
     updateDate.append(`${todayDate}`);
-    Object.keys(posts).forEach((topic) => {
+    Object.keys(allFeeds).sort().forEach((topic) => {
         nav.append(`
             <li><a href="#${topic}">${topic}</a></li>
         `);
@@ -138,7 +146,7 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
             </div>
         `);
         const feeds = $(`#${topic} > .feeds`);
-        posts[topic].forEach((feed) => {
+        allFeeds[topic].forEach((feed) => {
             let feedPosts = ``;
             feed.posts.forEach((post) => {
                 if (post.postRecency === 'more') {
@@ -172,6 +180,17 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
             `);
         });
     });
+    if (failedFeeds.length > 0) {
+        failedFeeds.append(`
+            <p>Failed sources:</p>
+            <ul></ul>    
+        `)
+        failedFeeds.forEach((failedFeed) => {
+            $('ul', '#failed').append(`
+                <li><a href="${failedFeed}">${failedFeed}</a></li>    
+            `)
+        });
+    }
     await fs.writeFile(htmlPath, $.html(), 'utf-8');
 }
 
@@ -180,7 +199,7 @@ async function buildTheGoodWeb({ runDaily = true, runWeekly = false } = {}) {
     if (runDaily) {
         try {
             console.log('Updating daily...');
-            await updateHTML(daily, feedsTitle, feedsInput, 2, 5);
+            await updateHTML(daily, feedsTitle, feedsInput, 1, 5);
         } catch(err) {
             console.log('Daily tried and failed.');
             console.log(err.message);
@@ -189,7 +208,7 @@ async function buildTheGoodWeb({ runDaily = true, runWeekly = false } = {}) {
     if (runWeekly) {
         try {
             console.log('Updating weekly...');
-            await updateHTML(weekly, feedsTitle, feedsInput, 8, 5);
+            await updateHTML(weekly, feedsTitle, feedsInput, 7, 5);
         } catch(err) {
             console.log('Weekly tried and failed.');
             console.log(err.message);

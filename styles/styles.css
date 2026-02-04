@@ -11,6 +11,9 @@ body {
     padding: 0.6rem;
     display: flex;
     flex-direction: column;
+    max-width: 120ch;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h1 {
@@ -128,6 +131,24 @@ footer a {
 
 #editions a.selected {
     color: black;
+}
+
+#failed {
+    color: #00000077;
+    font-size: 0.8em;
+    border-top: 1px solid black;
+}
+
+#failed ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 0.4em;
+    flex-wrap: wrap;
+}
+
+#failed a {
+    color: #888888;
 }
 
 .subtitle {

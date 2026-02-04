@@ -101,14 +101,21 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
         month: 'long',
         day: 'numeric'
     });
-    const pageTitle = $('h1', '#tgw-heading');
+    const headTitle = $('title');
+    const pageTitle = $('h1 > a', '#tgw-heading');
     const updateDate = $('p.issue-info.date');
     const nav = $('#nav > ul');
     const content = $('#content');
+    headTitle.empty();
     pageTitle.empty();
     updateDate.empty();
     nav.empty();
     content.empty();
+    if (age <= 3) {
+        headTitle.append(`${feedsTitle} | Daily`);
+    } else {
+        headTitle.append(`${feedsTitle} | Weekly`);
+    }
     pageTitle.append(`${feedsTitle}`);
     updateDate.append(`${todayDate}`);
     Object.keys(posts).forEach((topic) => {

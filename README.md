@@ -17,9 +17,8 @@ An introduction and step-by-step guide to actually using the world wide web, and
 ## To Do
 
 - [ ] Write docs
-- [ ] When doing both a daily and a weekly fetch, reuse data from weekly to populate daily?
-- [ ] Add timeout to fetching feeds ([Promise.race()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)?)
 - [ ] Finish main page
 - [ ] Finish "opinionated" page
 - [ ] Make good default opml
 - [ ] Add more sizes of favicons
+- [ ] When doing both a daily and a weekly fetch, reuse data from weekly to populate daily?

@@ -133,7 +133,7 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
     }
     pageTitle.append(`${feedsTitle}`);
     updateDate.append(`${todayDate}`);
-    Object.keys(allFeeds).sort().forEach((topic) => {
+    Object.keys(allFeeds).forEach((topic) => {
         nav.append(`
             <li><a href="#${topic}">${topic}</a></li>
         `);

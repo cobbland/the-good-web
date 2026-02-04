@@ -28,13 +28,20 @@ async function getFeeds(feedsInput, age, count) {
     let numOfValidFeeds = 0;
     const toDate = new Date();
     toDate.setUTCDate(toDate.getUTCDate() - age);
+    const timeout = (ms) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => reject(new Error('Timeout')), ms);
+        });
+    };
     for (const key of Object.keys(feedsInput)) {
         allFeeds[key] = [];
         for (const url of feedsInput[key]) {
             let feed = false;
             try {
-                feed = await parser.parseURL(url);
-
+                feed = await Promise.race([
+                    parser.parseURL(url),
+                    timeout(10000)
+                ]);
             } catch(err) {
                 console.log(`Failed to fetch: ${url}`);
                 console.log(err.message)

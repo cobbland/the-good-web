@@ -54,7 +54,6 @@
       <outline text="BASTIONLAND" title="BASTIONLAND" type="rss" xmlUrl="https://www.bastionland.com/feeds/posts/default" htmlUrl="https://www.bastionland.com/"/>
       <outline text="Carouse, Carouse!" title="Carouse, Carouse!" type="rss" xmlUrl="https://www.carouse.blog/rss/" htmlUrl="https://www.carouse.blog/"/>
       <outline text="The Alexandrian" title="The Alexandrian" type="rss" xmlUrl="https://thealexandrian.net/feed" htmlUrl="https://thealexandrian.net/"/>
-      <outline text="TTRPG Fanatics" title="TTRPG Fanatics" type="rss" xmlUrl="https://ttrpgfans.com/feed/" htmlUrl="https://ttrpgfans.com/"/>
       <outline text="Failure Tolerated" title="Failure Tolerated" type="rss" xmlUrl="https://www.failuretolerated.com/feed.rss" htmlUrl="https://www.failuretolerated.com"/>
       <outline text="Vladar's Blog" title="Vladar's Blog" type="rss" xmlUrl="https://vladar.bearblog.dev/feed/" htmlUrl="https://vladar.bearblog.dev/"/>
       <outline text="mindstorm" title="mindstorm" type="rss" xmlUrl="https://www.mindstormpress.com/feed.rss" htmlUrl="https://www.mindstormpress.com/"/>
@@ -75,6 +74,7 @@
       <outline text="Illusory Sensorium" title="Illusory Sensorium" type="rss" xmlUrl="https://illusorysensorium.com/rss/" htmlUrl="https://illusorysensorium.com/"/>
     </outline>
     <outline text="tech" title="tech">
+      <outline text="GamingOnLinux.com Latest Articles" title="GamingOnLinux.com Latest Articles" type="rss" xmlUrl="https://www.gamingonlinux.com/article_rss.php" htmlUrl="https://www.gamingonlinux.com/"/>
       <outline text="This Week in Videogames" title="This Week in Videogames" type="rss" xmlUrl="https://thisweekinvideogames.com/feed/" htmlUrl="https://thisweekinvideogames.com/"/>
       <outline text="LOW←TECH MAGAZINE English" title="LOW←TECH MAGAZINE English" type="rss" xmlUrl="https://solar.lowtechmagazine.com/posts/index.xml" htmlUrl="https://solar.lowtechmagazine.com/posts/"/>
       <outline text="Eteo Archetypes" title="Eteo Archetypes" type="rss" xmlUrl="https://www.eteogames.com/rss/" htmlUrl="https://www.eteogames.com/"/>

@@ -1,7 +1,24 @@
-/* @import url(https://fonts.bunny.net/css?family=unifrakturmaguntia:400); */
+:root {
+    /* --black: #1b1b1b;
+    --dark-gray: #595753;
+    --gray: #97948A;
+    --light-gray: #EAE4D4;
+    --white: #fff8e7; */
+
+    --black: #000000;
+    --dark-gray: #444444;
+    --gray: #888888;
+    --light-gray: #EEEEEE;
+    --white: #FFFFFF;
+}
 
 * {
   box-sizing: border-box;
+}
+
+html {
+    background-color: var(--white);
+    color: var(--black);
 }
 
 body {
@@ -17,7 +34,6 @@ body {
 }
 
 h1 {
-    /* font-family: 'UnifrakturMaguntia', 'Times New Roman', Times, serif; */
     font-family: 'Times New Roman', Times, serif;
     font-size: 3.5em;
     text-align: center;
@@ -43,7 +59,7 @@ h2 a:hover::after {
 }
 
 a {
-    color: black;
+    color: inherit;
 }
 
 footer {
@@ -51,13 +67,15 @@ footer {
     margin-top: auto;
     text-align: center;
     font-size: 0.8em;
-    color: #00000077;
-    border-top: 2px solid black;
+    color: var(--gray);
+    border-top: 2px solid var(--black);
     margin-bottom: -0.6rem;
 }
 
+
+
 footer a {
-    color: #00000077;
+    color: var(--gray);
 }
 
 #tgw-heading p {
@@ -71,12 +89,12 @@ footer a {
 }
 
 #tgw-content a:visited {
-    color: #888888;
+    color: var(--gray);
 }
 
 #nav {
-    border-top: 4px solid black;
-    border-bottom: 2px solid black;
+    border-top: 4px solid var(--black);
+    border-bottom: 2px solid var(--black);
     padding: 0.4em 0;
 }
 
@@ -92,17 +110,13 @@ footer a {
 
 #nav a {
     text-decoration: none;
-    color: black;
+    color: inherit;
     font-weight: bold;
     text-transform: capitalize;
 }
 
 #nav a:hover {
     text-decoration: underline;
-}
-
-#nav ul {
-    color: #00000077;
 }
 
 #content {
@@ -121,22 +135,22 @@ footer a {
     font-weight: normal;
     text-transform: uppercase;
     text-align: center;
-    color: #00000077;
+    color: var(--gray);
 }
 
 #editions a {
     text-decoration: none;
-    color: #00000077;
+    color: var(--gray);
 }
 
 #editions a.selected {
-    color: black;
+    color: var(--black);
 }
 
 #failed {
-    color: #00000077;
+    color: var(--gray);
     font-size: 0.8em;
-    border-top: 1px solid black;
+    border-top: 1px solid var(--black);
 }
 
 #failed ul {
@@ -148,7 +162,7 @@ footer a {
 }
 
 #failed a {
-    color: #888888;
+    color: inherit;
 }
 
 .subtitle {
@@ -167,7 +181,7 @@ footer a {
 
 .topic:nth-of-type(1n + 2) {
     padding-top: 1rem;
-    border-top: 1px solid black;
+    border-top: 1px solid var(--black);
 }
 
 .feed-name a {
@@ -194,11 +208,11 @@ footer a {
 }
 
 .post a:visited {
-    color: #888888;
+    color: var(--gray);
 }
 
 .post:hover {
-    background-color: #00000011;
+    background-color: var(--light-gray);
 }
 
 .post .post-title {
@@ -206,7 +220,7 @@ footer a {
 }
 
 .post.more-posts a {
-    color: #00000077;
+    color: var(--gray);
     font-size: 0.8em;
     display: block;
     width: min-content;
@@ -221,7 +235,7 @@ footer a {
 }
 
 .recency {
-    color: #00000077;
+    color: var(--gray);
     font-size: 0.8em;
     text-decoration: none;
 }
@@ -232,6 +246,22 @@ footer a {
 
 .recency::after {
     content: "]";
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* --white: #1b1b1b;
+        --light-gray: #595753;
+        --gray: #97948A;
+        --dark-gray: #EAE4D4;
+        --black: #fff8e7; */
+
+        --white: #000000;
+        --light-gray: #444444;
+        --gray: #888888;
+        --dark-gray: #EEEEEE;
+        --black: #FFFFFF;
+    }
 }
 
 @media (min-width: 800px) {

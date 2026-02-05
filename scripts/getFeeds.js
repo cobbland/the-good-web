@@ -181,7 +181,7 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
         });
     });
     if (failedFeeds.length > 0) {
-        failedFeeds.append(`
+        failed.append(`
             <p>Failed sources:</p>
             <ul></ul>    
         `)

@@ -139,7 +139,7 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
         `);
         content.append(`
             <div id="${topic}" class="topic">
-                <h2><a href="#the-good-web">${topic}</a></h2>
+                <h2><a href="#top">${topic}</a></h2>
                 <div class="feeds">
 
                 </div>

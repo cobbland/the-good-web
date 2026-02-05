@@ -148,6 +148,11 @@ footer a {
     color: var(--black);
 }
 
+a#end {
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
 #failed {
     color: var(--gray);
     font-size: 0.8em;

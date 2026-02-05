@@ -19,6 +19,7 @@
 html {
     background-color: var(--white);
     color: var(--black);
+    scroll-behavior: smooth;
 }
 
 body {

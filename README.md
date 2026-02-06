@@ -21,4 +21,5 @@ An introduction and step-by-step guide to actually using the world wide web, and
 - [ ] Finish "opinionated" page
 - [ ] Make good default opml
 - [ ] Add more sizes of favicons
+- [ ] Add keyboard navigation
 - [ ] When doing both a daily and a weekly fetch, reuse data from weekly to populate daily?

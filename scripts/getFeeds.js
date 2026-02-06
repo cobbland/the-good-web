@@ -133,18 +133,41 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
     }
     pageTitle.append(`${feedsTitle}`);
     updateDate.append(`${todayDate}`);
-    Object.keys(allFeeds).forEach((topic) => {
+    const allKeys = Object.keys(allFeeds);
+    allKeys.forEach((topic, i) => {
         nav.append(`
             <li><a href="#${topic}">${topic}</a></li>
         `);
         content.append(`
             <div id="${topic}" class="topic">
-                <h2><a href="#top">${topic}</a></h2>
+                <div class="topic-heading">
+                    <h2><a href="#top">${topic}</a></h2>
+                    <div class="sub-nav">
+                    </div>
+                </div>
                 <div class="feeds">
-
                 </div>
             </div>
         `);
+        const subNav = $(`#${topic} .sub-nav`);
+        if (allKeys[i - 1]) {
+            subNav.append(`
+                <a href="#${allKeys[i - 1]}">↑</a>
+            `);
+        } else {
+            subNav.append(`
+                <span class="disabled">↑</span>
+            `);
+        }
+        if (allKeys[i + 1]) {
+            subNav.append(`
+                <a href="#${allKeys[i + 1]}">↓</a>
+            `);
+        } else {
+            subNav.append(`
+                <span class="disabled">↓</span>
+            `);
+        }
         const feeds = $(`#${topic} > .feeds`);
         allFeeds[topic].forEach((feed) => {
             let feedPosts = ``;

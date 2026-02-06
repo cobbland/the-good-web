@@ -148,9 +148,16 @@ footer a {
     color: var(--black);
 }
 
-a#end {
+a#end,
+.sub-nav * {
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1.4em;
+    text-align: right;
+}
+
+.sub-nav span {
+    color: var(--gray);
+    cursor: default;
 }
 
 #failed {
@@ -188,6 +195,11 @@ a#end {
 .topic:nth-of-type(1n + 2) {
     padding-top: 1rem;
     border-top: 1px solid var(--black);
+}
+
+.topic-heading {
+    display: flex;
+    justify-content: space-between;
 }
 
 .feed-name a {

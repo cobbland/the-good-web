@@ -1,4 +1,4 @@
-name: Daily Netlify Build
+name: Daily Feed Update
 
 on:
   schedule:
@@ -8,7 +8,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Trigger Netlify Build Hook
+      - uses: actions/checkout@v6
+      
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      
+      - run: npm install
+      
+      - run: npm run fetch
+      
         run: |
-          curl -X POST ${{ secrets.NETLIFY_HOOK }}
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add weekly/index.html daily/index.html
+          git commit -m "Update feeds"
+          git push
+        

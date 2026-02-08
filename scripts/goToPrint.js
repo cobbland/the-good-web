@@ -1,5 +1,5 @@
 const { buildTheGoodWeb } = require('./getFeeds');
-const weeklyEditionDay = 0; // Sunday - Saturday : 0 - 6
+const weeklyEditionDay = 6; // Sunday - Saturday : 0 - 6
 
 async function goToPrint() {
     const today = new Date();

@@ -96,8 +96,8 @@ async function getFeeds(feedsInput, age, count) {
             delete allFeeds[topic];
         }
     }
-    console.log(`Fetched ${numOfValidFeeds} feeds.`)
-    console.log(`Failed to fetch ${failedFeeds.length} feeds.`)
+    console.log(`Fetched ${numOfValidFeeds} feeds.`);
+    console.log(`Failed to fetch ${failedFeeds.length} feeds.`);
     for (const topic of Object.keys(allFeeds)) {
         allFeeds[topic].sort((a, b) => a.siteTitle.localeCompare(b.siteTitle));
     }

@@ -38,7 +38,6 @@
       <outline text="Good Name For A Blog" title="Good Name For A Blog" type="rss" xmlUrl="https://goodnameforablog.com/index.xml" htmlUrl="https://goodnameforablog.com/"/>
       <outline text="Marder He Wrote" title="Marder He Wrote" type="rss" xmlUrl="https://andrewmarder.net/rss.xml" htmlUrl="https://andrewmarder.net/"/>
       <outline text="shellsharks All Content" title="shellsharks All Content" type="rss" xmlUrl="https://shellsharks.com/feeds/all-feed.xml" htmlUrl="https://shellsharks.com/"/>
-      <outline text="Unsung" title="Unsung" type="rss" xmlUrl="https://unsung.aresluna.org/feed.xml" htmlUrl="https://unsung.aresluna.org/"/>
       <outline text="gilest.org" title="gilest.org" type="rss" xmlUrl="https://gilest.org/feed/index.xml" htmlUrl="https://gilest.org/"/>
     </outline>
     <outline text="tabletop" title="tabletop">
@@ -46,7 +45,6 @@
       <outline text="Vintage RPG" title="Vintage RPG" type="rss" xmlUrl="https://www.vintagerpg.com/feed/" htmlUrl="https://www.vintagerpg.com/"/>
       <outline text="Words &amp; Other Sorcery" title="Words &amp; Other Sorcery" type="rss" xmlUrl="https://www.josephrlewis.com/feed/" htmlUrl="https://www.josephrlewis.com/"/>
       <outline text="Patchwork Paladin" title="Patchwork Paladin" type="rss" xmlUrl="https://patchworkpaladin.com/feed/" htmlUrl="https://patchworkpaladin.com/"/>
-      <outline text="EN World: Tabletop RPG News &amp; Reviews" title="EN World: Tabletop RPG News &amp; Reviews" type="rss" xmlUrl="https://www.enworld.org/ewr-porta/index.rss" htmlUrl="https://www.enworld.org/"/>
       <outline text="New School Revolution" title="New School Revolution" type="rss" xmlUrl="https://newschoolrevolution.com/feed.xml" htmlUrl="https://newschoolrevolution.com/"/>
       <outline text="Playful Void" title="Playful Void" type="rss" xmlUrl="https://playfulvoid.game.blog/feed/" htmlUrl="https://playfulvoid.game.blog/"/>
       <outline text="Save vs. Total Party Kill" title="Save vs. Total Party Kill" type="rss" xmlUrl="https://save.vs.totalpartykill.ca/atom.xml" htmlUrl="https://save.vs.totalpartykill.ca/atom.xml"/>

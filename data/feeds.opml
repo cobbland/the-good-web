@@ -70,6 +70,7 @@
       <outline text="Idraluna Archives" title="Idraluna Archives" type="rss" xmlUrl="https://idraluna-archives.bearblog.dev/feed/" htmlUrl="https://idraluna-archives.bearblog.dev/"/>
       <outline text="Illusory Sensorium" title="Illusory Sensorium" type="rss" xmlUrl="https://illusorysensorium.com/rss/" htmlUrl="https://illusorysensorium.com/"/>
       <outline text="Taskerland" title="Taskerland" type="rss" xmlUrl="https://tasker.land/feed/" htmlUrl="https://tasker.land/"/>
+      <outline text="Coins and Scrolls" title="Coins and Scrolls" type="rss" xmlUrl="https://coinsandscrolls.blogspot.com/feeds/posts/default" htmlUrl="https://coinsandscrolls.blogspot.com"/>
     </outline>
     <outline text="tech" title="tech">
       <outline text="GamingOnLinux.com Latest Articles" title="GamingOnLinux.com Latest Articles" type="rss" xmlUrl="https://www.gamingonlinux.com/article_rss.php" htmlUrl="https://www.gamingonlinux.com/"/>

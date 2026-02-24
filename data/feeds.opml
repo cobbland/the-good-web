@@ -33,7 +33,7 @@
       <outline text="Writing from the desk of Henry (From Online)" title="Writing from the desk of Henry (From Online)" type="rss" xmlUrl="https://henry.codes/rss/writing.xml" htmlUrl="https://henry.codes/"/>
       <outline text="ᕕ( ᐛ )ᕗ Herman's blog" title="ᕕ( ᐛ )ᕗ Herman's blog" type="rss" xmlUrl="https://herman.bearblog.dev/feed/" htmlUrl="http://herman.bearblog.dev/"/>
       <outline text="マリウス" title="マリウス" type="rss" xmlUrl="https://xn--gckvb8fzb.com/index.xml" htmlUrl="https://xn--gckvb8fzb.com/"/>
-      <outline text="BinaryDigit" title="BinaryDigit" type="rss" xmlUrl="https://binarydigit.dev/feed/" htmlUrl="https://binarydigit.dev/"/>
+      <outline text="BinaryDigit" title="BinaryDigit" type="rss" xmlUrl="https://binarydigit.net/feed/" htmlUrl="https://binarydigit.net/"/>
       <outline text="brennan.day" title="brennan.day" type="rss" xmlUrl="https://brennan.day/feed.xml" htmlUrl="https://brennan.day/"/>
       <outline text="Good Name For A Blog" title="Good Name For A Blog" type="rss" xmlUrl="https://goodnameforablog.com/index.xml" htmlUrl="https://goodnameforablog.com/"/>
       <outline text="Marder He Wrote" title="Marder He Wrote" type="rss" xmlUrl="https://andrewmarder.net/rss.xml" htmlUrl="https://andrewmarder.net/"/>
@@ -111,7 +111,9 @@
       <outline text="The Public Domain Review" title="The Public Domain Review" type="rss" xmlUrl="https://publicdomainreview.org/rss.xml" htmlUrl="http://github.com/dylang/node-rss"/>
       <outline text="The Pudding" title="The Pudding" type="rss" xmlUrl="https://pudding.cool/rss.xml" htmlUrl="https://pudding.cool/"/>
       <outline text="Going Medieval" title="Going Medieval" type="rss" xmlUrl="https://going-medieval.com/feed/" htmlUrl="https://going-medieval.com/"/>
-      <outline text="Centauri Dreams — Imagining and Planning Interstellar Exploration" title="Centauri Dreams — Imagining and Planning Interstellar Exploration" type="rss" xmlUrl="https://follow.it/centauri-dreams-imagining-and-planning-interstellar-exploration/rss" htmlUrl="https://follow.it/centauri-dreams-imagining-and-planning-interstellar-exploration"/>
+      <outline text="Centauri Dreams — Imagining and Planning Interstellar Exploration" title="Centauri Dreams — Imagining and Planning Interstellar Exploration" type="rss" xmlUrl="https://follow.it/centauri-dreams-imagining-and-planning-interstellar-exploration/rss" htmlUrl="https://www.centauri-dreams.org"/>
+      <outline text="Religion Dispatches" title="Religion Dispatches" type="rss" xmlUrl="https://religiondispatches.org/feed" htmlUrl="https://religiondispatches.org/"/>
+      <outline text="Earth and Alter" title="Earth and Alter" type="rss" xmlUrl="https://earthandaltarmag.com/posts?format=rss" htmlUrl="https://earthandaltarmag.com/"/>
     </outline>
   </body>
 </opml>

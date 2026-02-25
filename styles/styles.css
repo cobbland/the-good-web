@@ -148,7 +148,13 @@ footer a {
     color: var(--black);
 }
 
-a#end,
+#end {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+#end a,
 .sub-nav * {
     text-decoration: none;
     font-size: 1.4em;

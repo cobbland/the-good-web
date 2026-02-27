@@ -91,6 +91,7 @@
       <outline text="This Week in the IndieWeb" title="This Week in the IndieWeb" type="rss" xmlUrl="https://indieweb.org/this-week/feed.xml" htmlUrl="https://indieweb.org/this-week"/>
       <outline text="BASIC Code" title="BASIC Code" type="rss" xmlUrl="https://basic-code.bearblog.dev/feed/" htmlUrl="https://basic-code.bearblog.dev/"/>
       <outline text="GB Studio Central" title="GB Studio Central" type="rss" xmlUrl="https://gbstudiocentral.com/feed/" htmlUrl="https://gbstudiocentral.com/"/>
+      <outline text="Time Extension" title="Time Extension" type="rss" xmlUrl="https://www.timeextension.com/feeds/latest" htmlUrl="https://www.timeextension.com/"/>
     </outline>
     <outline text="news" title="news">
       <outline text="Socialist Forum" title="Socialist Forum" type="rss" xmlUrl="https://socialistforum.dsausa.org/feed/" htmlUrl="https://socialistforum.dsausa.org/"/>

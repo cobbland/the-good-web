@@ -41,7 +41,7 @@ async function getFeeds(feedsInput, age, count) {
             try {
                 feed = await Promise.race([
                     parser.parseURL(url),
-                    timeout(10000)
+                    timeout(15000)
                 ]);
             } catch(err) {
                 failedFeeds.push(url);

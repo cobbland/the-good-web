@@ -100,7 +100,6 @@
     </outline>
     <outline text="other" title="other">
       <outline text="HUDS+GUIS" title="HUDS+GUIS" type="rss" xmlUrl="https://feeds.feedburner.com/Hudsandguis" htmlUrl="https://www.hudsandguis.com/"/>
-      <outline text="The Planetary Society Articles" title="The Planetary Society Articles" type="rss" xmlUrl="https://www.planetary.org/rss/articles" htmlUrl="https://www.planetary.org/"/>
       <outline text="Colossal" title="Colossal" type="rss" xmlUrl="https://www.thisiscolossal.com/feed/" htmlUrl="https://www.thisiscolossal.com/"/>
       <outline text="Electric Literature" title="Electric Literature" type="rss" xmlUrl="https://electricliterature.com/feed/" htmlUrl="https://electricliterature.com/"/>
       <outline text="Locus Online" title="Locus Online" type="rss" xmlUrl="https://locusmag.com/feed/" htmlUrl="https://locusmag.com/"/>

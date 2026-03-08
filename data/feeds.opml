@@ -10,7 +10,7 @@
       <outline text="oatmilk" title="oatmilk" type="rss" xmlUrl="https://blog.saisarida.com/feed.xml" htmlUrl="https://blog.saisarida.com/"/>
       <outline text="Julia Densford" title="Julia Densford" type="rss" xmlUrl="https://julia.densford.net/feed.xml" htmlUrl="https://julia.densford.net/"/>
       <outline text="anhvn" title="anhvn" type="rss" xmlUrl="https://anhvn.com/feed.xml" htmlUrl="https://anhvn.com/"/>
-      <outline text="Gridranger" title="Gridranger" type="rss" xmlUrl="https://gridranger.frama.io/feeds/all.atom.xml" htmlUrl="https://gridranger.frama.io/"/>
+      <outline text="Gridranger" title="Gridranger" type="rss" xmlUrl="https://blog.gridranger.dev/feeds/all.atom.xml" htmlUrl="https://blog.gridranger.dev/"/>
       <outline text="LMNT" title="LMNT" type="rss" xmlUrl="https://lmnt.me/feed.xml" htmlUrl="https://lmnt.me/"/>
       <outline text="Matt's Blog" title="Matt's Blog" type="rss" xmlUrl="https://mtwb.blog/index.xml" htmlUrl="https://mtwb.blog/"/>
       <outline text="maya.land" title="maya.land" type="rss" xmlUrl="https://maya.land/feed.xml" htmlUrl="https://maya.land/"/>
@@ -35,7 +35,6 @@
       <outline text="BinaryDigit" title="BinaryDigit" type="rss" xmlUrl="https://binarydigit.net/feed/" htmlUrl="https://binarydigit.net/"/>
       <outline text="Good Name For A Blog" title="Good Name For A Blog" type="rss" xmlUrl="https://goodnameforablog.com/index.xml" htmlUrl="https://goodnameforablog.com/"/>
       <outline text="Marder He Wrote" title="Marder He Wrote" type="rss" xmlUrl="https://andrewmarder.net/rss.xml" htmlUrl="https://andrewmarder.net/"/>
-      <outline text="shellsharks All Content" title="shellsharks All Content" type="rss" xmlUrl="https://shellsharks.com/feeds/all-feed.xml" htmlUrl="https://shellsharks.com/"/>
       <outline text="gilest.org" title="gilest.org" type="rss" xmlUrl="https://gilest.org/feed/index.xml" htmlUrl="https://gilest.org/"/>
     </outline>
     <outline text="tabletop" title="tabletop">
@@ -54,7 +53,6 @@
       <outline text="mindstorm" title="mindstorm" type="rss" xmlUrl="https://www.mindstormpress.com/feed.rss" htmlUrl="https://www.mindstormpress.com/"/>
       <outline text="Necrotic Gnome - News" title="Necrotic Gnome - News" type="rss" xmlUrl="https://necroticgnome.com/blogs/news.atom" htmlUrl="https://necroticgnome.com/blogs/news"/>
       <outline text="Prismatic Wasteland" title="Prismatic Wasteland" type="rss" xmlUrl="https://www.prismaticwasteland.com/blog?format=rss" htmlUrl="https://www.prismaticwasteland.com/"/>
-      <outline text="Sabre Games and Cards" title="Sabre Games and Cards" type="rss" xmlUrl="https://www.thirdkingdomgames.com/blog-feed.xml" htmlUrl="https://www.thirdkingdomgames.com/blog"/>
       <outline text="Sly Flourish" title="Sly Flourish" type="rss" xmlUrl="https://slyflourish.com/index.xml" htmlUrl="https://slyflourish.com/"/>
       <outline text="The Coded Type" title="The Coded Type" type="rss" xmlUrl="https://thecodedtype.com/rss.xml" htmlUrl="https://www.thecodedtype.com/"/>
       <outline text="Weird Wonder - Amanda P.'s blog" title="Weird Wonder - Amanda P.'s blog" type="rss" xmlUrl="https://weirdwonder.bearblog.dev/feed/" htmlUrl="https://weirdwonder.bearblog.dev/"/>

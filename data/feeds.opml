@@ -109,7 +109,6 @@
       <outline text="Going Medieval" title="Going Medieval" type="rss" xmlUrl="https://going-medieval.com/feed/" htmlUrl="https://going-medieval.com/"/>
       <outline text="Centauri Dreams — Imagining and Planning Interstellar Exploration" title="Centauri Dreams — Imagining and Planning Interstellar Exploration" type="rss" xmlUrl="https://follow.it/centauri-dreams-imagining-and-planning-interstellar-exploration/rss" htmlUrl="https://www.centauri-dreams.org"/>
       <outline text="Religion Dispatches" title="Religion Dispatches" type="rss" xmlUrl="https://religiondispatches.org/feed" htmlUrl="https://religiondispatches.org/"/>
-      <outline text="Earth and Alter" title="Earth and Alter" type="rss" xmlUrl="https://earthandaltarmag.com/posts?format=rss" htmlUrl="https://earthandaltarmag.com/"/>
     </outline>
   </body>
 </opml>

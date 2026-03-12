@@ -222,7 +222,7 @@ async function buildTheGoodWeb({ runDaily = true, runWeekly = false } = {}) {
     if (runDaily) {
         try {
             console.log('Updating daily...');
-            await updateHTML(daily, feedsTitle, feedsInput, 1, 5);
+            await updateHTML(daily, feedsTitle, feedsInput, 1, 7);
         } catch(err) {
             console.log('Daily tried and failed.');
             console.log(err.message);
@@ -231,7 +231,7 @@ async function buildTheGoodWeb({ runDaily = true, runWeekly = false } = {}) {
     if (runWeekly) {
         try {
             console.log('Updating weekly...');
-            await updateHTML(weekly, feedsTitle, feedsInput, 7, 5);
+            await updateHTML(weekly, feedsTitle, feedsInput, 7, 7);
         } catch(err) {
             console.log('Weekly tried and failed.');
             console.log(err.message);

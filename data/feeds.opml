@@ -36,6 +36,7 @@
       <outline text="Good Name For A Blog" title="Good Name For A Blog" type="rss" xmlUrl="https://goodnameforablog.com/index.xml" htmlUrl="https://goodnameforablog.com/"/>
       <outline text="Marder He Wrote" title="Marder He Wrote" type="rss" xmlUrl="https://andrewmarder.net/rss.xml" htmlUrl="https://andrewmarder.net/"/>
       <outline text="gilest.org" title="gilest.org" type="rss" xmlUrl="https://gilest.org/feed/index.xml" htmlUrl="https://gilest.org/"/>
+      <outline text="brennan.day" title="brennan.day" type="rss" xmlUrl="https://brennan.day/feed.xml" htmlUrl="https://brennan.day/"/>
     </outline>
     <outline text="tabletop" title="tabletop">
       <outline text="PARADISO" title="PARADISO" type="rss" xmlUrl="https://www.paradiso.zone/rss/" htmlUrl="https://www.paradiso.zone/"/>

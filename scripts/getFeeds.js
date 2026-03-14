@@ -63,7 +63,7 @@ async function getFeeds(feedsInput, age, count) {
                     .slice(0, count+1)
                     .map((post) => {
                         const posted = new Date(post.pubDate);
-                        const recency = `${posted.getDate()}/${posted.getMonth()+1}`
+                        const recency = `${posted.getMonth()+1}/${posted.getDate()}`
                         return {
                             postTitle: post.title || 'Untitled Post',
                             postLink: post.link,

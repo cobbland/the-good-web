@@ -1,29 +1,31 @@
-const Parser = require('rss-parser');
+const Parser = require("rss-parser");
 const parser = new Parser();
-const cheerio = require('cheerio');
-const fs = require('fs/promises');
-const weekly = 'weekly/index.html';
-const daily = 'daily/index.html';
-const opmlFeeds = 'data/feeds.opml';
+const cheerio = require("cheerio");
+const fs = require("fs/promises");
+const weekly = "weekly/index.html";
+const daily = "daily/index.html";
+const opmlFeeds = "data/feeds.opml";
 
 async function translateOPML(opmlPath) {
-    const opml = await fs.readFile(opmlPath, 'utf-8');
-    const $ = cheerio.load(opml, {xml: true});
-    const title = $('head > title').text();
+    const opml = await fs.readFile(opmlPath, "utf-8");
+    const $ = cheerio.load(opml, { xml: true });
+    const title = $("head > title").text();
     const feeds = {};
-    $('body > outline').each((i, elem) => {
-        feeds[$(elem).attr('text')] = [];
-        $(elem).find('outline').each((n, subElem) => {
-            feeds[$(elem).attr('text')].push(
-                $(subElem).attr('xmlUrl')
-            );
-        })
+    $("body > outline").each((i, elem) => {
+        feeds[$(elem).attr("text")] = [];
+        $(elem)
+            .find("outline")
+            .each((n, subElem) => {
+                feeds[$(elem).attr("text")].push($(subElem).attr("xmlUrl"));
+            });
     });
     return [title, feeds];
 }
 
 async function getFeeds(feedsInput, age, count) {
-    console.log(`Fetching ${count} posts from each feed from the last ${age} days...`)
+    console.log(
+        `Fetching ${count} posts from each feed from the last ${age} days...`,
+    );
     let allFeeds = {};
     let numOfValidFeeds = 0;
     let failedFeeds = [];
@@ -31,7 +33,7 @@ async function getFeeds(feedsInput, age, count) {
     toDate.setUTCDate(toDate.getUTCDate() - age);
     const timeout = (ms) => {
         return new Promise((resolve, reject) => {
-            setTimeout(() => reject(new Error('Timeout')), ms);
+            setTimeout(() => reject(new Error("Timeout")), ms);
         });
     };
     for (const key of Object.keys(feedsInput)) {
@@ -41,54 +43,65 @@ async function getFeeds(feedsInput, age, count) {
             try {
                 feed = await Promise.race([
                     parser.parseURL(url),
-                    timeout(15000)
+                    timeout(15000),
                 ]);
-            } catch(err) {
+            } catch (err) {
                 failedFeeds.push(url);
                 console.log(`Failed to fetch: ${url}`);
-                console.log(err.message)
+                console.log(err.message);
                 continue;
             }
             if (feed) {
-                const posts = feed.items
-                    .filter((post) => {
-                        const postDate = new Date(post.pubDate);
-                        return postDate.getTime() >= (toDate.getTime() - 3600000);
-                    })
-                    .sort((a, b) => {
-                        const firstDate = new Date(a.pubDate);
-                        const secondDate = new Date(b.pubDate);
-                        return secondDate.getTime() - firstDate.getTime();
-                    })
-                    .slice(0, count+1)
-                    .map((post) => {
-                        const posted = new Date(post.pubDate);
-                        const recency = `${posted.getMonth()+1}/${posted.getDate()}`
-                        return {
-                            postTitle: post.title || 'Untitled Post',
-                            postLink: post.link,
-                            postRecency: recency,
-                        }
-                    });
-                const site = {
-                    siteTitle: feed.title || feed.link,
-                    siteLink: feed.link || feed.feedUrl,
-                    posts: posts,
-                };
-                if (site.posts.length > count) {
-                    site.posts.push({
-                        postTitle: 'more',
-                        postLink: site.siteLink,
-                        postRecency: 'more',
-                    });
+                try {
+                    const posts = feed.items
+                        .filter((post) => {
+                            const postDate = new Date(post.pubDate);
+                            return (
+                                postDate.getTime() >= toDate.getTime() - 3600000
+                            );
+                        })
+                        .sort((a, b) => {
+                            const firstDate = new Date(a.pubDate);
+                            const secondDate = new Date(b.pubDate);
+                            return secondDate.getTime() - firstDate.getTime();
+                        })
+                        .slice(0, count + 1)
+                        .map((post) => {
+                            const posted = new Date(post.pubDate);
+                            const recency = `${posted.getMonth() + 1}/${posted.getDate()}`;
+                            return {
+                                postTitle:
+                                    typeof post.title === "string"
+                                        ? post.title
+                                        : "Untitled Post",
+                                postLink:
+                                    typeof post.link === "string"
+                                        ? post.link
+                                        : "/",
+                                postRecency: recency,
+                            };
+                        });
+                    const site = {
+                        siteTitle: feed.title || feed.link,
+                        siteLink: feed.link || feed.feedUrl,
+                        posts: posts,
+                    };
+                    if (site.posts.length > count) {
+                        site.posts.push({
+                            postTitle: "more",
+                            postLink: site.siteLink,
+                            postRecency: "more",
+                        });
+                    }
+                    if (site.posts.length > 0) {
+                        allFeeds[key].push(site);
+                    }
+                    console.log(`Fetched: ${url}`);
+                    numOfValidFeeds++;
+                } catch (err) {
+                    console.log(err);
                 }
-                if (site.posts.length > 0) {
-                    allFeeds[key].push(site);
-                }
-                console.log(`Fetched: ${url}`);
-                numOfValidFeeds++;
             }
-            
         }
     }
     for (const topic of Object.keys(allFeeds)) {
@@ -106,20 +119,20 @@ async function getFeeds(feedsInput, age, count) {
 
 async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
     const { allFeeds, failedFeeds } = await getFeeds(feedsInput, age, count);
-    const html = await fs.readFile(htmlPath, 'utf-8');
+    const html = await fs.readFile(htmlPath, "utf-8");
     const $ = cheerio.load(html);
-    const todayDate = new Date().toLocaleDateString('en-GB', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+    const todayDate = new Date().toLocaleDateString("en-GB", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
     });
-    const headTitle = $('title');
-    const pageTitle = $('h1 > a', '#tgw-heading');
-    const updateDate = $('p.issue-info.date');
-    const nav = $('#nav > ul');
-    const content = $('#content');
-    const failed = $('#failed');
+    const headTitle = $("title");
+    const pageTitle = $("h1 > a", "#tgw-heading");
+    const updateDate = $("p.issue-info.date");
+    const nav = $("#nav > ul");
+    const content = $("#content");
+    const failed = $("#failed");
     headTitle.empty();
     pageTitle.empty();
     updateDate.empty();
@@ -135,107 +148,115 @@ async function updateHTML(htmlPath, feedsTitle, feedsInput, age, count) {
     updateDate.append(`${todayDate}`);
     const allKeys = Object.keys(allFeeds);
     allKeys.forEach((topic, i) => {
-        nav.append(`
-            <li><a href="#${topic}">${topic}</a></li>
-        `);
-        content.append(`
-            <div id="${topic}" class="topic">
-                <div class="topic-heading">
-                    <h2><a href="#top">${topic}</a></h2>
-                    <div class="sub-nav">
+        try {
+            nav.append(`
+                <li><a href="#${topic}">${topic}</a></li>
+            `);
+            content.append(`
+                <div id="${topic}" class="topic">
+                    <div class="topic-heading">
+                        <h2><a href="#top">${topic}</a></h2>
+                        <div class="sub-nav">
+                        </div>
+                    </div>
+                    <div class="feeds">
                     </div>
                 </div>
-                <div class="feeds">
-                </div>
-            </div>
-        `);
-        const subNav = $(`#${topic} .sub-nav`);
-        if (allKeys[i - 1]) {
-            subNav.append(`
-                <a href="#${allKeys[i - 1]}">↑</a>
             `);
-        } else {
-            subNav.append(`
-                <span class="disabled">↑</span>
-            `);
-        }
-        if (allKeys[i + 1]) {
-            subNav.append(`
-                <a href="#${allKeys[i + 1]}">↓</a>
-            `);
-        } else {
-            subNav.append(`
-                <span class="disabled">↓</span>
-            `);
-        }
-        const feeds = $(`#${topic} > .feeds`);
-        allFeeds[topic].forEach((feed) => {
-            let feedPosts = ``;
-            feed.posts.forEach((post) => {
-                if (post.postRecency === 'more') {
-                    feedPosts = feedPosts + `
-                        <li class="post more-posts">
-                            <a href="${post.postLink}">
-                                <div class="post-title">${post.postTitle}</div>
-                            </a>
-                        </li>
-                    `
-                } else {
-                    feedPosts = feedPosts + `
-                        <li class="post">
-                            <a href="${post.postLink}">
-                                <div class="post-title">${post.postTitle}</div>
-                                <div class="recency">${post.postRecency}</div>
-                            </a>
-                        </li>
-                    `
-                }
+            const subNav = $(`#${topic} .sub-nav`);
+            if (allKeys[i - 1]) {
+                subNav.append(`
+                    <a href="#${allKeys[i - 1]}">↑</a>
+                `);
+            } else {
+                subNav.append(`
+                    <span class="disabled">↑</span>
+                `);
+            }
+            if (allKeys[i + 1]) {
+                subNav.append(`
+                    <a href="#${allKeys[i + 1]}">↓</a>
+                `);
+            } else {
+                subNav.append(`
+                    <span class="disabled">↓</span>
+                `);
+            }
+            const feeds = $(`#${topic} > .feeds`);
+            allFeeds[topic].forEach((feed) => {
+                let feedPosts = ``;
+                feed.posts.forEach((post) => {
+                    if (post.postRecency === "more") {
+                        feedPosts =
+                            feedPosts +
+                            `
+                            <li class="post more-posts">
+                                <a href="${post.postLink}">
+                                    <div class="post-title">${post.postTitle}</div>
+                                </a>
+                            </li>
+                        `;
+                    } else {
+                        feedPosts =
+                            feedPosts +
+                            `
+                            <li class="post">
+                                <a href="${post.postLink}">
+                                    <div class="post-title">${post.postTitle}</div>
+                                    <div class="recency">${post.postRecency}</div>
+                                </a>
+                            </li>
+                        `;
+                    }
+                });
+                feeds.append(`
+                    <div class="feed">
+                        <h3 class="feed-name">
+                            <a href="${feed.siteLink}">${feed.siteTitle}</a>
+                        </h3>
+                        <ul class="posts">
+                            ${feedPosts}
+                        </ul>
+                    </div>
+                `);
             });
-            feeds.append(`
-                <div class="feed">
-                    <h3 class="feed-name">
-                        <a href="${feed.siteLink}">${feed.siteTitle}</a>
-                    </h3>
-                    <ul class="posts">
-                        ${feedPosts}
-                    </ul>
-                </div>
-            `);
-        });
+        } catch (err) {
+            console.log(err);
+        }
     });
     if (failedFeeds.length > 0) {
         failed.append(`
             <p>Failed sources:</p>
             <ul></ul>    
-        `)
+        `);
         failedFeeds.forEach((failedFeed) => {
-            $('ul', '#failed').append(`
+            $("ul", "#failed").append(`
                 <li><a href="${failedFeed}">${failedFeed}</a></li>    
-            `)
+            `);
         });
     }
-    await fs.writeFile(htmlPath, $.html(), 'utf-8');
+    await fs.writeFile(htmlPath, $.html(), "utf-8");
 }
 
 async function buildTheGoodWeb({ runDaily = true, runWeekly = false } = {}) {
     const [feedsTitle, feedsInput] = await translateOPML(opmlFeeds);
     if (runDaily) {
         try {
-            console.log('Updating daily...');
+            console.log("Updating daily...");
             await updateHTML(daily, feedsTitle, feedsInput, 1, 7);
-        } catch(err) {
-            console.log('Daily tried and failed.');
+        } catch (err) {
+            console.log("Daily tried and failed.");
             console.log(err.message);
         }
     }
     if (runWeekly) {
         try {
-            console.log('Updating weekly...');
+            console.log("Updating weekly...");
             await updateHTML(weekly, feedsTitle, feedsInput, 7, 7);
-        } catch(err) {
-            console.log('Weekly tried and failed.');
+        } catch (err) {
+            console.log("Weekly tried and failed.");
             console.log(err.message);
-        } 
+        }
     }
     process.exit(0);
 }

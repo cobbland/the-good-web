@@ -93,13 +93,10 @@
       <outline text="Time Extension" title="Time Extension" type="rss" xmlUrl="https://www.timeextension.com/feeds/latest" htmlUrl="https://www.timeextension.com/"/>
     </outline>
     <outline text="news" title="news">
-      <outline text="Socialist Forum" title="Socialist Forum" type="rss" xmlUrl="https://socialistforum.dsausa.org/feed/" htmlUrl="https://socialistforum.dsausa.org/"/>
-      <outline text="Democratic Left" title="Democratic Left" type="rss" xmlUrl="https://democraticleft.dsausa.org/feed/" htmlUrl="https://democraticleft.dsausa.org/"/>
       <outline text="The Daily News" title="The Daily News" type="rss" xmlUrl="https://legiblenews.com/daily/feeds/60313bc257847f9cfa3c18515cd65bbc.rss" htmlUrl="https://www.legiblenews.com/"/>
       <outline text="ProPublica" title="ProPublica" type="rss" xmlUrl="https://www.propublica.org/feeds/propublica/main" htmlUrl="https://www.propublica.org/feeds/main"/>
       <outline text="Rest of World - Latest Stories" title="Rest of World - Latest Stories" type="rss" xmlUrl="https://restofworld.org/feed/latest" htmlUrl="https://restofworld.org/"/>
       <outline text="The Markup" title="The Markup" type="rss" xmlUrl="https://themarkup.org/feeds/rss.xml" htmlUrl="https://themarkup.org/"/>
-      <outline text="- Religious Socialism" title="- Religious Socialism" type="rss" xmlUrl="https://www.religioussocialism.org/blog.rss" htmlUrl="https://www.religioussocialism.org/blog"/>
     </outline>
     <outline text="other" title="other">
       <outline text="HUDS+GUIS" title="HUDS+GUIS" type="rss" xmlUrl="https://feeds.feedburner.com/Hudsandguis" htmlUrl="https://www.hudsandguis.com/"/>
